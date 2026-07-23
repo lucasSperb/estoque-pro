@@ -1,0 +1,28 @@
+import { create } from "zustand";
+
+const useLayoutStore = create((set) => ({
+  collapsed: false,
+  mobileOpen: false,
+
+  toggleCollapsed: () =>
+    set((state) => ({
+      collapsed: !state.collapsed,
+    })),
+
+  openMobile: () =>
+    set({
+      mobileOpen: true,
+    }),
+
+  closeMobile: () =>
+    set({
+      mobileOpen: false,
+    }),
+
+  toggleMobile: () =>
+    set((state) => ({
+      mobileOpen: !state.mobileOpen,
+    })),
+}));
+
+export default useLayoutStore;

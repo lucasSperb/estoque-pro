@@ -1,0 +1,240 @@
+.header {
+  height: var(--header-height);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  background: var(--surface);
+
+  border-bottom: 1px solid var(--border);
+
+  position: sticky;
+  top: 0;
+
+  z-index: 20;
+}
+
+.header__left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.header__menuButton{
+
+width:46px;
+
+height:46px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:var(--card);
+
+border-radius:12px;
+
+color:var(--text);
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.header__menuButton:hover{
+
+background:var(--primary);
+
+color:white;
+
+}
+
+.header__menuButton svg{
+
+font-size:22px;
+
+}
+
+.header__search {
+  width: 380px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: var(--card);
+
+  border: 1px solid transparent;
+
+  border-radius: 12px;
+
+  padding: 0 16px;
+
+  transition: .25s;
+}
+
+.header__search:focus-within {
+
+border-color:var(--primary);
+
+}
+
+.header__search svg {
+
+font-size:18px;
+
+color:var(--text-muted);
+
+}
+
+.header__search input{
+
+flex:1;
+
+background:none;
+
+color:var(--text);
+
+}
+
+.header__search input::placeholder{
+
+color:var(--text-muted);
+
+}
+
+.header__actions{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+.header__notification{
+
+width:46px;
+
+height:46px;
+
+background:var(--card);
+
+border-radius:12px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:var(--text);
+
+transition:.25s;
+
+}
+
+.header__notification:hover{
+
+background:var(--primary);
+
+}
+
+.header__notification svg{
+
+font-size:20px;
+
+}
+
+.header__profile{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.header__avatar{
+
+width:46px;
+
+height:46px;
+
+border-radius:50%;
+
+background:var(--primary);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-weight:bold;
+
+font-size:18px;
+
+color:white;
+
+box-shadow:0 8px 20px rgba(59,130,246,.35);
+
+}
+
+.header__profile strong{
+
+display:block;
+
+font-size:15px;
+
+}
+
+.header__profile p{
+
+font-size:13px;
+
+color:var(--text-muted);
+
+}
+
+@media(max-width:900px){
+
+.header{
+
+padding:0 16px;
+
+}
+
+.header__search{
+
+width:220px;
+
+}
+
+}
+
+@media(max-width:650px){
+
+.header__profile div:last-child{
+
+display:none;
+
+}
+
+.header__search{
+
+width:160px;
+
+}
+
+}
