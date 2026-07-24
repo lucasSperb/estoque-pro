@@ -1,4 +1,4 @@
-import "../../../styles/Dashboard.css";
+import "../styles/Dashboard.css";
 
 import SummaryCard from "../components/SummaryCard/SummaryCard";
 import SalesChart from "../components/SalesChart/SalesChart";

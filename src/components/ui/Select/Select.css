@@ -1,0 +1,101 @@
+.select {
+  position: relative;
+
+  width: 230px;
+}
+
+.select__control {
+  width: 100%;
+
+  height: 46px;
+
+  padding: 0 16px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border);
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.select__control:hover {
+  border-color: var(--primary);
+}
+
+.select__control.open {
+  border-color: var(--primary);
+
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+
+.select__arrow {
+  transition: .25s;
+}
+
+.select__arrow.rotate {
+  transform: rotate(180deg);
+}
+
+.select__menu {
+  position: absolute;
+
+  top: calc(100% + 8px);
+
+  left: 0;
+
+  width: 100%;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow: 0 20px 40px rgba(0,0,0,.35);
+
+  z-index: 999;
+}
+
+.select__option {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 14px 16px;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+  color: var(--text-secondary);
+}
+
+.select__option:hover {
+  background: rgba(59,130,246,.12);
+
+  color: white;
+}
+
+.select__option.active {
+  background: var(--primary);
+
+  color: white;
+
+  font-weight: 600;
+}

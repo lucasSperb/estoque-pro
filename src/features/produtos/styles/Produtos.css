@@ -1,0 +1,682 @@
+.produtos {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Cabeçalho */
+
+.produtos__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.produtos__header h1 {
+  font-size: 2rem;
+  color: var(--text);
+}
+
+.produtos__header p {
+  margin-top: 4px;
+  color: var(--text-secondary);
+}
+
+/* Botão */
+
+.produtos__button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: var(--primary);
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 12px 18px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: .25s;
+}
+
+.produtos__button:hover {
+  opacity: .9;
+}
+
+/* Toolbar */
+
+.produtos__toolbar {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Busca */
+
+.produtos__search {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  padding: 0 16px;
+}
+
+.produtos__search input {
+  flex: 1;
+
+  height: 46px;
+
+  background: transparent;
+
+  border: none;
+
+  color: var(--text);
+
+  outline: none;
+}
+
+/* Filtro */
+
+.produtos__filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.produtos__filter svg {
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+/* Conteúdo */
+
+.produtos__content {
+  background: var(--surface);
+  overflow-x: auto;
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 40px;
+
+  min-height: 450px;
+}
+
+.produtos__empty {
+  text-align: center;
+}
+
+.produtos__empty h2 {
+  margin-bottom: 10px;
+}
+
+.produtos__empty p {
+  color: var(--text-secondary);
+}
+
+
+/* ==========================
+   FOOTER
+========================== */
+
+.produtos__footer {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 30px;
+
+  padding-top: 24px;
+
+  border-top: 1px solid var(--border);
+
+}
+
+
+.produtos__results {
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+}
+
+
+.produtos__results strong {
+
+  color: var(--text);
+
+  margin: 0 4px;
+
+  font-size: 15px;
+
+}
+
+
+/* ==========================
+   ITENS POR PÁGINA
+========================== */
+
+
+.produtos__perPage {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+
+.produtos__perPage span {
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+
+}
+
+
+
+/* ==========================
+   CUSTOM SELECT
+========================== */
+
+
+.customSelect {
+
+  position: relative;
+
+  width: 90px;
+
+  user-select: none;
+
+}
+
+
+.customSelect__value {
+
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+
+  color: var(--text);
+
+  cursor: pointer;
+
+  transition: .25s;
+
+}
+
+
+.customSelect__value:hover {
+
+  border-color: var(--primary);
+
+}
+
+
+
+/* opções */
+
+.customSelect__options {
+
+  position: absolute;
+
+  bottom: calc(100% + 8px);
+
+  left: 0;
+
+  width: 100%;
+
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+
+  padding: 6px;
+
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translateY(10px);
+
+
+  transition: .25s;
+
+
+  z-index: 20;
+
+}
+
+
+/* abre ao passar mouse */
+
+.customSelect:hover .customSelect__options {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateY(0);
+
+}
+
+
+
+.customSelect__option {
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+
+  text-align: center;
+
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+
+  transition: .2s;
+
+}
+
+
+
+.customSelect__option:hover {
+
+  background: rgba(59, 130, 246, .15);
+
+  color: var(--text);
+
+}
+
+
+
+.customSelect__option.active {
+
+  background: var(--primary);
+
+  color: white;
+
+}
+
+
+
+/* ==========================
+   RESPONSIVIDADE TABLET
+========================== */
+
+@media (max-width: 1100px) {
+
+  .produtos__content {
+
+    padding: 30px;
+
+  }
+
+
+  .produtos__toolbar {
+
+    gap: 14px;
+
+  }
+
+
+  .produtos__search {
+
+    width: 100%;
+
+  }
+
+
+  .produtos__filter {
+
+    width: 100%;
+
+  }
+
+}
+
+
+
+/* ==========================
+   TABLET / NOTEBOOK
+========================== */
+
+@media (max-width: 900px) {
+
+
+  .produtos {
+
+    gap: 20px;
+
+  }
+
+
+
+  .produtos__header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+  }
+
+
+
+  .produtos__header h1 {
+
+    font-size: 1.7rem;
+
+  }
+
+
+
+  .produtos__toolbar {
+
+    flex-direction: column;
+
+  }
+
+
+
+  .produtos__filter {
+
+    width: 100%;
+
+  }
+
+
+
+  .produtos__content {
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+  }
+
+
+
+  .produtos__footer {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+  }
+
+
+}
+
+
+
+/* ==========================
+   CELULAR
+========================== */
+
+@media (max-width: 700px) {
+
+
+  .produtos {
+
+    gap: 16px;
+
+  }
+
+
+
+  .produtos__header {
+
+    gap: 15px;
+
+  }
+
+
+
+  .produtos__header h1 {
+
+    font-size: 1.5rem;
+
+  }
+
+
+
+  .produtos__header p {
+
+    font-size: 14px;
+
+  }
+
+
+
+  .produtos__content {
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    overflow-x: auto;
+
+  }
+
+
+
+  .produtos__search {
+
+    height: 44px;
+
+  }
+
+
+
+  .produtos__search input {
+
+    height: 42px;
+
+    font-size: 14px;
+
+  }
+
+
+
+  .produtos__footer {
+
+    width: 100%;
+
+    gap: 16px;
+
+  }
+
+
+
+  .produtos__results {
+
+    font-size: 13px;
+
+  }
+
+
+
+  .produtos__perPage {
+
+    width: 100%;
+
+    justify-content: space-between;
+
+  }
+
+
+
+  .customSelect {
+
+    width: 80px;
+
+  }
+
+
+}
+
+
+
+/* ==========================
+   CELULAR PEQUENO
+========================== */
+
+@media (max-width: 480px) {
+
+
+  .produtos {
+
+    gap: 14px;
+
+  }
+
+
+
+  .produtos__header h1 {
+
+    font-size: 1.3rem;
+
+  }
+
+
+
+  .produtos__header p {
+
+    font-size: 13px;
+
+  }
+
+
+
+  .produtos__button {
+
+    width: 100%;
+
+    justify-content: center;
+
+  }
+
+
+
+  .produtos__content {
+
+    padding: 14px;
+
+  }
+
+
+
+  .produtos__footer {
+
+    padding-top: 18px;
+
+  }
+
+
+
+  .produtos__perPage {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+  }
+
+
+
+  .customSelect {
+
+    width: 100%;
+
+  }
+
+
+
+  .customSelect__value {
+
+    height: 38px;
+
+  }
+
+
+
+  .customSelect__options {
+
+    bottom: auto;
+
+    top: calc(100% + 8px);
+
+  }
+
+}
+
+
+
+/* ==========================
+   TELAS GRANDES
+========================== */
+
+@media (min-width: 1400px) {
+
+
+  .produtos__content {
+
+    padding: 50px;
+
+  }
+
+
+
+  .produtos__header h1 {
+
+    font-size: 2.2rem;
+
+  }
+
+
+}
