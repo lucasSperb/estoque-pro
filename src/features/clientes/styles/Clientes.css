@@ -1,0 +1,199 @@
+.clientes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.clientes__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clientes__header h1 {
+  font-size: 1.75rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.clientes__header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.clientes__filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.clientes__search {
+  position: relative;
+  flex: 1;
+}
+
+.clientes__searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted, var(--text-secondary));
+  font-size: 1.1rem;
+}
+
+.clientes__search input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.clientes__search input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Tabela de Clientes padronizada */
+.clientesTable {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.clientesTable__head {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1.5fr 100px;
+  align-items: center;
+  background: var(--card);
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding: 0 6px;
+}
+
+.clientesTable__head > div {
+  padding: 18px;
+}
+
+.clientesTable__row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1.5fr 100px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  transition: 0.25s;
+  padding: 0 6px;
+}
+
+.clientesTable__row:last-child {
+  border-bottom: none;
+}
+
+.clientesTable__row:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.clientesTable__row > div {
+  padding: 18px;
+  color: var(--text-secondary);
+}
+
+.clientesTable__row strong {
+  color: var(--text);
+}
+
+.clientesTable__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.clientesTable__actions button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+
+.clientesTable__actions button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.clientesTable__actions button.delete:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.clientes__empty {
+  padding: 60px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.clientes__empty h3 {
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.clientes__empty p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+  .clientesTable__head {
+    display: none;
+  }
+
+  .clientesTable__row {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .clientesTable__row > div {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .clientesTable__row > div::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .clientesTable__actions {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 500px) {
+  .clientesTable__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .clientesTable__actions button {
+    flex: 1;
+    height: 42px;
+  }
+}

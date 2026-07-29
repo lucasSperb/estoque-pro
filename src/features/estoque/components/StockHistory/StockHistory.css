@@ -20,24 +20,25 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #94a3b8;
+  color: var(--text-muted, var(--text-secondary));
   font-size: 1.1rem;
 }
 
 .stockHistory__search input {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.75rem;
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  color: #f8fafc;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.25s ease;
+  transition: 0.25s ease;
 }
 
 .stockHistory__search input:focus {
-  border-color: #3b82f6;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .stockHistory__select {
@@ -45,54 +46,59 @@
 }
 
 .stockHistory__empty {
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 12px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
   padding: 3rem 1.5rem;
   text-align: center;
 }
 
 .stockHistory__empty h3 {
-  color: #f8fafc;
+  color: var(--text);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
 .stockHistory__empty p {
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
-/* Tabela de Histórico com divs */
+/* Tabela de Histórico */
 .stockHistoryTable {
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
   overflow: hidden;
 }
 
 .stockHistoryTable__head {
   display: grid;
   grid-template-columns: 1.4fr 1.8fr 1.2fr 0.8fr 0.8fr 1fr 2fr;
-  padding: 1rem 1.25rem;
-  background-color: #273449;
-  border-bottom: 1px solid #334155;
-  color: #94a3b8;
+  align-items: center;
+  padding: 0 6px;
+  background-color: var(--card);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
   font-size: 0.85rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+}
+
+.stockHistoryTable__head > div {
+  padding: 18px;
 }
 
 .stockHistoryTable__row {
   display: grid;
   grid-template-columns: 1.4fr 1.8fr 1.2fr 0.8fr 0.8fr 1fr 2fr;
-  padding: 1rem 1.25rem;
   align-items: center;
-  border-bottom: 1px solid #334155;
-  color: #f8fafc;
+  padding: 0 6px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
   font-size: 0.9rem;
-  transition: background-color 0.25s ease;
+  transition: 0.25s ease;
 }
 
 .stockHistoryTable__row:last-child {
@@ -100,50 +106,56 @@
 }
 
 .stockHistoryTable__row:hover {
-  background-color: #273449;
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.stockHistoryTable__row > div {
+  padding: 18px;
 }
 
 .stockHistoryTable__date {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 0.85rem;
 }
 
 .stockHistoryTable__product strong {
-  color: #f8fafc;
+  color: var(--text);
 }
 
 .stockHistoryTable__qty {
   font-weight: 600;
+  color: var(--text);
 }
 
 .stockHistoryTable__obs {
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 0.85rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Badges de tipo */
+/* Badges de Tipo de Movimentação */
 .stockBadge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 12px;
   font-weight: 600;
-
-  background-color: #334155;
-  color: #f8fafc;
+  width: fit-content;
+  background-color: var(--card);
+  color: var(--text);
 }
 
 .stockBadge--success {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #10b981;
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
 }
 
 .stockBadge--danger {
@@ -156,10 +168,11 @@
   color: #f59e0b;
 }
 
-/* Responsividade */
+/* Responsividade Mobile */
 @media (max-width: 992px) {
   .stockHistory__filters {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .stockHistory__select {
@@ -174,19 +187,21 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
-    padding: 1.25rem;
+    gap: 14px;
+    padding: 18px;
   }
 
   .stockHistoryTable__row > div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    padding: 0;
   }
 
   .stockHistoryTable__row > div::before {
     content: attr(data-label);
-    color: #94a3b8;
+    color: var(--text);
     font-weight: 600;
     font-size: 0.85rem;
   }
