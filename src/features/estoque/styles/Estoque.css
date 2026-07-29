@@ -4,6 +4,37 @@ flex-direction:column;
 gap:24px;
 }
 
+.estoque__nav {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #334155;
+  margin-bottom: 1.5rem;
+}
+
+.estoque__tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.estoque__tab:hover {
+  color: #f8fafc;
+}
+
+.estoque__tab--active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+}
+
 .estoque__header{
 display:flex;
 justify-content:space-between;

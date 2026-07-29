@@ -7,31 +7,29 @@ import {
 } from "react-icons/fi";
 
 import Button from "../../../../components/ui/Button/Button";
-import Select from "../../../../components/ui/Select/Select"; // Ajuste o caminho se necessário
-import useProductStore from "../../../../store/useProductStore"; // Importação da store correta
+import Select from "../../../../components/ui/Select/Select";
+import useProductStore from "../../../../store/useProductStore";
 import "./StockMovementModal.css";
 
 function StockMovementModal({
   open,
   product,
+  initialType = "entrada", // 👈 Nova prop recebendo o tipo inicial
   onClose,
   onSave,
 }) {
-  // Busca a lista de produtos da useProductStore
   const products = useProductStore((state) => state.products || []);
 
   const [selectedProductId, setSelectedProductId] = useState("");
-  const [type, setType] = useState("entrada");
+  const [type, setType] = useState(initialType);
   const [quantity, setQuantity] = useState("");
   const [observation, setObservation] = useState("");
 
-  // Monta as opções do Select no formato { value, label }
   const productOptions = products.map((p) => ({
     value: p.id,
     label: `${p.nome} (Atual: ${p.estoque ?? 0})`,
   }));
 
-  // Define qual produto está sendo movimentado (passado via prop ou selecionado no modal)
   const currentProduct = product || products.find((p) => String(p.id) === String(selectedProductId));
 
   useEffect(() => {
@@ -45,10 +43,11 @@ function StockMovementModal({
       setSelectedProductId("");
     }
 
-    setType("entrada");
+    // Define o tipo com base na prop initialType ("entrada", "saida" ou "ajuste")
+    setType(initialType);
     setQuantity("");
     setObservation("");
-  }, [open, product, products]);
+  }, [open, product, products, initialType]);
 
   if (!open) return null;
 
@@ -102,6 +101,7 @@ function StockMovementModal({
           </div>
 
           <button
+            type="button"
             className="stockMovementModal__close"
             onClick={onClose}
           >
@@ -110,7 +110,6 @@ function StockMovementModal({
         </div>
 
         <form onSubmit={handleSubmit} className="stockMovementModal__body">
-          {/* Exibe o Select apenas quando o botão 'Nova Movimentação' for clicado sem um produto pré-selecionado */}
           {!product && (
             <div className="stockMovementModal__field">
               <label>Produto</label>

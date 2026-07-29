@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiList, FiClock } from "react-icons/fi";
 
 import Button from "../../../components/ui/Button/Button";
 import useProductStore from "../../../store/useProductStore";
@@ -7,25 +7,27 @@ import useStockStore from "../../../store/useStockStore";
 
 import StockSummary from "../components/StockSummary/StockSummary";
 import StockTable from "../components/StockTable/StockTable";
+import StockHistory from "../components/StockHistory/StockHistory";
 import StockMovementModal from "../components/StockMovementModal/StockMovementModal";
+import ProductDetailsModal from "../../Produtos/components/ProductDetailsModal/ProductDetailsModal";
 
 import "../styles/Estoque.css";
 
 function Estoque() {
+  const [activeTab, setActiveTab] = useState("table"); // 'table' | 'history'
   const [movementOpen, setMovementOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [movementType, setMovementType] = useState("entrada");
 
-  // Escuta a lista de produtos reativa da store diretamente
+  const [viewProduct, setViewProduct] = useState(null);
+
   const products = useProductStore((state) => state.products) || [];
   const updateProduct = useProductStore((state) => state.updateProduct);
-
   const addMovement = useStockStore((state) => state.addMovement);
 
-  // ⚠️ REMOVIDO: O useEffect com loadProducts() foi removido para evitar
-  // que o estado seja resetado logo após a montagem do componente.
-
-  function handleMovement(product) {
+  function handleMovement(product, type = "entrada") {
     setSelectedProduct(product);
+    setMovementType(type);
     setMovementOpen(true);
   }
 
@@ -84,6 +86,7 @@ function Estoque() {
           icon={<FiPlus />}
           onClick={() => {
             setSelectedProduct(null);
+            setMovementType("entrada");
             setMovementOpen(true);
           }}
         >
@@ -93,21 +96,51 @@ function Estoque() {
 
       <StockSummary />
 
+      <div className="estoque__nav">
+        <button
+          type="button"
+          className={`estoque__tab ${activeTab === "table" ? "estoque__tab--active" : ""}`}
+          onClick={() => setActiveTab("table")}
+        >
+          <FiList /> Produtos em Estoque
+        </button>
+
+        <button
+          type="button"
+          className={`estoque__tab ${activeTab === "history" ? "estoque__tab--active" : ""}`}
+          onClick={() => setActiveTab("history")}
+        >
+          <FiClock /> Histórico de Movimentações
+        </button>
+      </div>
+
       <div className="estoque__content">
-        <StockTable
-          products={products}
-          onMovement={handleMovement}
-        />
+        {activeTab === "table" ? (
+          <StockTable
+            products={products}
+            onMovement={handleMovement}
+            onView={(product) => setViewProduct(product)}
+          />
+        ) : (
+          <StockHistory />
+        )}
       </div>
 
       <StockMovementModal
         open={movementOpen}
         product={selectedProduct}
+        initialType={movementType}
         onClose={() => {
           setMovementOpen(false);
           setSelectedProduct(null);
         }}
         onSave={handleSaveMovement}
+      />
+
+      <ProductDetailsModal
+        open={!!viewProduct}
+        product={viewProduct}
+        onClose={() => setViewProduct(null)}
       />
     </div>
   );
