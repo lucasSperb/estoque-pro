@@ -113,7 +113,7 @@ function Produtos() {
       <div className="produtos__header">
         <div>
           <h1>Produtos</h1>
-          <p>Gerencie todos os produtos do estoque.</p>
+          <p>Cadastro de produtos do estoque.</p>
         </div>
 
         <Button
