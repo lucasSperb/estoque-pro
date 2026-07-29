@@ -40,8 +40,6 @@ function Produtos() {
   const updateProduct = useProductStore((state) => state.updateProduct);
   const deleteProduct = useProductStore((state) => state.deleteProduct);
 
-  // ⚠️ REMOVIDO: O useEffect com loadProducts() foi apagado para impedir o reset dos dados.
-
   async function handleSave(product) {
     if (selectedProduct?.id) {
       await updateProduct({

@@ -11,9 +11,6 @@ const useStockStore = create(
       page: 1,
       itemsPerPage: 10,
 
-      // ==========================
-      // FILTROS
-      // ==========================
       setSearch: (search) => set({ search, page: 1 }),
       setPage: (page) => set({ page }),
       setItemsPerPage: (itemsPerPage) =>
@@ -22,16 +19,10 @@ const useStockStore = create(
           page: 1,
         }),
 
-      // ==========================
-      // PRODUTOS (Busca da useProductStore)
-      // ==========================
       getProducts: () => {
         return useProductStore.getState().products || [];
       },
 
-      // ==========================
-      // MOVIMENTAÇÕES DE ESTOQUE
-      // ==========================
       addMovement: ({ productId, quantity, type, reason = "", observation = "" }) => {
         const productStore = useProductStore.getState();
         const products = productStore.products || [];
@@ -39,7 +30,7 @@ const useStockStore = create(
         const product = products.find((p) => String(p.id) === String(productId));
         if (!product) return;
 
-        const currentStock = Number(product.estoque || 0);
+        const currentStock = Number(product.estoque ?? product.quantidade ?? 0);
         let newStock = currentStock;
         const qtyNum = Number(quantity || 0);
 
@@ -61,10 +52,10 @@ const useStockStore = create(
             return;
         }
 
-        // Atualiza a quantidade diretamente na store de produtos
         productStore.updateProduct({
           ...product,
           estoque: newStock,
+          quantidade: newStock,
         });
 
         const movement = {
@@ -85,9 +76,6 @@ const useStockStore = create(
         }));
       },
 
-      // ==========================
-      // LISTAS
-      // ==========================
       getFilteredProducts: () => {
         const products = get().getProducts();
         const text = get().search.trim().toLowerCase();
@@ -118,9 +106,6 @@ const useStockStore = create(
         );
       },
 
-      // ==========================
-      // RESUMO
-      // ==========================
       getSummary: () => {
         const products = get().getProducts();
 
@@ -130,7 +115,7 @@ const useStockStore = create(
         let totalValue = 0;
 
         products.forEach((product) => {
-          const stock = Number(product.estoque || 0);
+          const stock = Number(product.estoque ?? product.quantidade ?? 0);
           const minimum = Number(product.estoqueMinimo || 0);
           const price = Number(product.preco || 0);
 
@@ -152,7 +137,7 @@ const useStockStore = create(
       },
     }),
     {
-      name: "estoque-movements", // Salva o histórico de movimentações com persist do Zustand
+      name: "estoque-movements",
     }
   )
 );

@@ -1,0 +1,194 @@
+.saleModal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.saleModal {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.saleModal__header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+}
+
+.saleModal__header h2 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.saleModal__close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.saleModal__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  overflow-y: auto;
+}
+
+.saleModal__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.saleModal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.saleModal__field label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.saleModal__field input,
+.saleModal__field select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  outline: none;
+}
+
+.saleModal__addItem {
+  display: flex;
+  gap: 8px;
+}
+
+.saleModal__addItem select {
+  flex: 1;
+}
+
+.saleModal__addItem input {
+  width: 80px;
+}
+
+.saleModal__section h3 {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.saleModal__cart {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--card);
+}
+
+.saleModal__cart h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.saleModal__cartEmpty {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.saleModal__cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.saleModal__cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.saleModal__cartItem:last-child {
+  border-bottom: none;
+}
+
+.saleModal__cartItem div {
+  display: flex;
+  flex-direction: column;
+}
+
+.saleModal__cartItem span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.saleModal__cartItemActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.saleModal__cartItemActions button {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.saleModal__footerSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.saleModal__totals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.saleModal__totals .total {
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+.saleModal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}

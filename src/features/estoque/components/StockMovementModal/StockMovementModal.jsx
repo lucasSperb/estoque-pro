@@ -14,20 +14,20 @@ import "./StockMovementModal.css";
 function StockMovementModal({
   open,
   product,
-  initialType = "entrada", // 👈 Nova prop recebendo o tipo inicial
   onClose,
   onSave,
 }) {
   const products = useProductStore((state) => state.products || []);
 
   const [selectedProductId, setSelectedProductId] = useState("");
-  const [type, setType] = useState(initialType);
+  const [type, setType] = useState("entrada");
   const [quantity, setQuantity] = useState("");
   const [observation, setObservation] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const productOptions = products.map((p) => ({
     value: p.id,
-    label: `${p.nome} (Atual: ${p.estoque ?? 0})`,
+    label: `${p.nome} (Atual: ${p.estoque ?? p.quantidade ?? 0})`,
   }));
 
   const currentProduct = product || products.find((p) => String(p.id) === String(selectedProductId));
@@ -43,32 +43,39 @@ function StockMovementModal({
       setSelectedProductId("");
     }
 
-    // Define o tipo com base na prop initialType ("entrada", "saida" ou "ajuste")
-    setType(initialType);
+    setType("entrada");
     setQuantity("");
     setObservation("");
-  }, [open, product, products, initialType]);
+    setIsSubmitting(false);
+  }, [open, product, products]);
 
   if (!open) return null;
 
   function handleSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
+
+    if (isSubmitting) return;
 
     const value = Number(quantity);
 
     if (!value || value <= 0 || !currentProduct) return;
 
-    onSave({
-      productId: currentProduct.id,
-      type,
-      quantity: value,
-      observation,
-    });
+    setIsSubmitting(true);
+
+    if (typeof onSave === "function") {
+      onSave({
+        productId: currentProduct.id,
+        type,
+        quantity: value,
+        observation,
+      });
+    }
 
     onClose();
   }
 
-  const currentStock = currentProduct ? Number(currentProduct.estoque || 0) : 0;
+  const currentStock = currentProduct ? Number(currentProduct.estoque ?? currentProduct.quantidade ?? 0) : 0;
   let previewStock = currentStock;
 
   if (quantity !== "") {
@@ -88,8 +95,8 @@ function StockMovementModal({
   }
 
   return (
-    <div className="stockMovementModal__overlay">
-      <div className="stockMovementModal">
+    <div className="stockMovementModal__overlay" onClick={onClose}>
+      <div className="stockMovementModal" onClick={(e) => e.stopPropagation()}>
         <div className="stockMovementModal__header">
           <div>
             <h2>Movimentar Estoque</h2>
@@ -194,8 +201,8 @@ function StockMovementModal({
               Cancelar
             </Button>
 
-            <Button type="submit" disabled={!currentProduct}>
-              Salvar
+            <Button type="submit" disabled={!currentProduct || isSubmitting}>
+              {isSubmitting ? "Salvando..." : "Salvar"}
             </Button>
           </div>
         </form>

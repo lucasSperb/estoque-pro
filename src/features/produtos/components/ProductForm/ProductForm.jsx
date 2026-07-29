@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import {
-  FiX,
-  FiSave,
-} from "react-icons/fi";
+import { FiX, FiSave } from "react-icons/fi";
+import Input from "@/components/ui/Input/Input";
+import Select from "@/components/ui/Select/Select";
+import Button from "@/components/ui/Button/Button";
 
 import "./ProductForm.css";
 
@@ -19,12 +19,14 @@ const initialState = {
   imagem: "",
 };
 
-function ProductForm({
-  open,
-  onClose,
-  onSave,
-  product,
-}) {
+const categoriaOptions = [
+  { label: "Perfumes", value: "Perfumes" },
+  { label: "Cabelos", value: "Cabelos" },
+  { label: "Hidratantes", value: "Hidratantes" },
+  { label: "Banho", value: "Banho" },
+];
+
+function ProductForm({ open, onClose, onSave, product }) {
   const [form, setForm] = useState(initialState);
 
   useEffect(() => {
@@ -51,11 +53,7 @@ function ProductForm({
       window.addEventListener("keydown", handleKeyDown);
     }
 
-    return () =>
-      window.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open, onClose]);
 
   function handleChange(e) {
@@ -64,6 +62,13 @@ function ProductForm({
     setForm((old) => ({
       ...old,
       [name]: value,
+    }));
+  }
+
+  function handleSelectChange(fieldName, value) {
+    setForm((old) => ({
+      ...old,
+      [fieldName]: value,
     }));
   }
 
@@ -106,147 +111,89 @@ function ProductForm({
   if (!open) return null;
 
   return (
-    <div
-      className="productForm__overlay"
-      onClick={onClose}
-    >
-      <div
-        className="productForm"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="productForm__overlay" onClick={onClose}>
+      <div className="productForm" onClick={(e) => e.stopPropagation()}>
         <div className="productForm__header">
-          <h2>
-            {product
-              ? "Editar Produto"
-              : "Novo Produto"}
-          </h2>
+          <h2>{product ? "Editar Produto" : "Novo Produto"}</h2>
 
-          <button
-            type="button"
-            onClick={onClose}
-          >
+          <button type="button" onClick={onClose}>
             <FiX />
           </button>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="productForm__grid">
+            <Input
+              label="Código *"
+              required
+              name="codigo"
+              value={form.codigo}
+              onChange={handleChange}
+            />
+
+            <Input
+              label="Nome *"
+              required
+              name="nome"
+              value={form.nome}
+              onChange={handleChange}
+            />
 
             <div>
-              <label>Código</label>
-
-              <input
-                required
-                name="codigo"
-                value={form.codigo}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label>Nome</label>
-
-              <input
-                required
-                name="nome"
-                value={form.nome}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label>Categoria</label>
-
-              <select
-                required
-                name="categoria"
+              <label>Categoria *</label>
+              <Select
+                options={categoriaOptions}
                 value={form.categoria}
-                onChange={handleChange}
-              >
-                <option value="">
-                  Selecione
-                </option>
-
-                <option value="Perfumes">
-                  Perfumes
-                </option>
-
-                <option value="Cabelos">
-                  Cabelos
-                </option>
-
-                <option value="Hidratantes">
-                  Hidratantes
-                </option>
-
-                <option value="Banho">
-                  Banho
-                </option>
-              </select>
-            </div>
-
-            <div>
-              <label>Marca</label>
-
-              <input
-                name="marca"
-                value={form.marca}
-                onChange={handleChange}
+                placeholder="Selecione"
+                onChange={(val) => handleSelectChange("categoria", val)}
               />
             </div>
 
-            <div>
-              <label>Custo</label>
+            <Input
+              label="Marca"
+              name="marca"
+              value={form.marca}
+              onChange={handleChange}
+            />
 
-              <input
-                type="number"
-                step="0.01"
-                name="custo"
-                value={form.custo}
-                onChange={handleChange}
-              />
-            </div>
+            <Input
+              label="Custo (R$)"
+              type="number"
+              step="0.01"
+              name="custo"
+              value={form.custo}
+              onChange={handleChange}
+            />
 
-            <div>
-              <label>Preço</label>
+            <Input
+              label="Preço (R$) *"
+              required
+              type="number"
+              step="0.01"
+              name="preco"
+              value={form.preco}
+              onChange={handleChange}
+            />
 
-              <input
-                required
-                type="number"
-                step="0.01"
-                name="preco"
-                value={form.preco}
-                onChange={handleChange}
-              />
-            </div>
+            <Input
+              label="Estoque"
+              type="number"
+              name="estoque"
+              value={form.estoque}
+              onChange={handleChange}
+            />
 
-            <div>
-              <label>Estoque</label>
-
-              <input
-                type="number"
-                name="estoque"
-                value={form.estoque}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label>Estoque mínimo</label>
-
-              <input
-                type="number"
-                name="estoqueMinimo"
-                value={form.estoqueMinimo}
-                onChange={handleChange}
-              />
-            </div>
-
+            <Input
+              label="Estoque mínimo"
+              type="number"
+              name="estoqueMinimo"
+              value={form.estoqueMinimo}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="productForm__textarea">
             <label>Descrição</label>
-
             <textarea
               rows="5"
               name="descricao"
@@ -256,23 +203,14 @@ function ProductForm({
           </div>
 
           <div className="productForm__footer">
-
-            <button
-              type="button"
-              className="secondary"
-              onClick={onClose}
-            >
+            <Button type="button" variant="secondary" onClick={onClose}>
               Cancelar
-            </button>
+            </Button>
 
-            <button
-              type="submit"
-              className="primary"
-            >
+            <Button type="submit">
               <FiSave />
               Salvar
-            </button>
-
+            </Button>
           </div>
         </form>
       </div>

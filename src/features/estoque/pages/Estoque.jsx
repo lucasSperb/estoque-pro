@@ -18,6 +18,9 @@ function Estoque() {
   const [movementOpen, setMovementOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [movementType, setMovementType] = useState("entrada");
+  
+  // Flag para evitar requisições/chamadas duplas consecutivas
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [viewProduct, setViewProduct] = useState(null);
 
@@ -32,44 +35,55 @@ function Estoque() {
   }
 
   async function handleSaveMovement(movementData) {
-    const { productId, type, quantity, observation } = movementData;
+    // Se já estiver salvando, bloqueia a segunda chamada!
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
-    const targetProduct = products.find((p) => String(p.id) === String(productId));
-    if (!targetProduct) return;
+    try {
+      const { productId, type, quantity, observation } = movementData;
 
-    const currentStock = Number(targetProduct.estoque || 0);
-    let newStock = currentStock;
+      const targetProduct = products.find((p) => String(p.id) === String(productId));
+      if (!targetProduct) return;
 
-    if (type === "entrada") {
-      newStock = currentStock + quantity;
-    } else if (type === "saida") {
-      newStock = Math.max(0, currentStock - quantity);
-    } else if (type === "ajuste") {
-      newStock = quantity;
+      const currentStock = Number(targetProduct.estoque ?? targetProduct.quantidade ?? 0);
+      const qtyNumber = Number(quantity) || 0;
+
+      let newStock = currentStock;
+
+      if (type === "entrada") {
+        newStock = currentStock + qtyNumber;
+      } else if (type === "saida") {
+        newStock = Math.max(0, currentStock - qtyNumber);
+      } else if (type === "ajuste") {
+        newStock = qtyNumber;
+      }
+
+      if (updateProduct) {
+        await updateProduct({
+          ...targetProduct,
+          estoque: newStock,
+          quantidade: newStock,
+        });
+      }
+
+      if (addMovement) {
+        addMovement({
+          productId,
+          productName: targetProduct.nome,
+          type,
+          quantity: qtyNumber,
+          previousStock: currentStock,
+          newStock,
+          observation,
+          createdAt: new Date().toISOString(),
+        });
+      }
+
+      setMovementOpen(false);
+      setSelectedProduct(null);
+    } finally {
+      setIsSubmitting(false);
     }
-
-    if (updateProduct) {
-      await updateProduct({
-        ...targetProduct,
-        estoque: newStock,
-      });
-    }
-
-    if (addMovement) {
-      addMovement({
-        productId,
-        productName: targetProduct.nome,
-        type,
-        quantity,
-        previousStock: currentStock,
-        newStock,
-        observation,
-        createdAt: new Date().toISOString(),
-      });
-    }
-
-    setMovementOpen(false);
-    setSelectedProduct(null);
   }
 
   return (

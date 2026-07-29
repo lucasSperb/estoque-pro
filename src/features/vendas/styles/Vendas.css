@@ -1,0 +1,242 @@
+.vendas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vendas__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vendas__header h1 {
+  font-size: 1.75rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.vendas__header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.vendas__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.vendasCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vendasCard__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.vendasCard__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.vendasCard__info span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.vendasCard__info strong {
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+.vendas__filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.vendas__search {
+  position: relative;
+  flex: 1;
+}
+
+.vendas__searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.vendas__search input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.vendas__search input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.vendas__select {
+  padding: 0.75rem 1rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  outline: none;
+}
+
+/* Tabela em DIVs */
+.vendasTable {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.vendasTable__head {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr 1.5fr 1.2fr 1.2fr 80px;
+  align-items: center;
+  background: var(--card);
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding: 0 6px;
+}
+
+.vendasTable__head > div {
+  padding: 18px;
+}
+
+.vendasTable__row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr 1.5fr 1.2fr 1.2fr 80px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  transition: 0.25s;
+  padding: 0 6px;
+}
+
+.vendasTable__row:last-child {
+  border-bottom: none;
+}
+
+.vendasTable__row:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.vendasTable__row > div {
+  padding: 18px;
+  color: var(--text-secondary);
+}
+
+.vendasBadge {
+  padding: 6px 12px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.vendasBadge--concluida {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.vendasBadge--cancelada {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.vendasTable__actions button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+
+.vendasTable__actions button.delete:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.vendas__empty {
+  padding: 60px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.vendas__empty h3 {
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.vendas__empty p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 992px) {
+  .vendasTable__head {
+    display: none;
+  }
+
+  .vendasTable__row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .vendasTable__row > div {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .vendasTable__row > div::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text);
+  }
+}

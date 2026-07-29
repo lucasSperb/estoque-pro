@@ -73,7 +73,7 @@ const useProductStore = create(
         try {
           const novo = await productService.create(product);
           set((state) => ({
-            products: [...state.products, novo],
+            products: [...state.products, novo || product],
           }));
         } catch (error) {
           console.error(error);
@@ -81,24 +81,30 @@ const useProductStore = create(
       },
 
       updateProduct: async (product) => {
+        set((state) => ({
+          products: state.products.map((p) =>
+            String(p.id) === String(product.id) ? { ...p, ...product } : p
+          ),
+        }));
+
         try {
-          const atualizado = await productService.update(product);
-          set((state) => ({
-            products: state.products.map((p) =>
-              String(p.id) === String(atualizado.id) ? atualizado : p
-            ),
-          }));
+          if (productService && typeof productService.update === "function") {
+            await productService.update(product);
+          }
         } catch (error) {
-          console.error(error);
+          console.error("Erro ao atualizar produto no serviço:", error);
         }
       },
 
       deleteProduct: async (id) => {
+        set((state) => ({
+          products: state.products.filter((p) => String(p.id) !== String(id)),
+        }));
+
         try {
-          await productService.remove(id);
-          set((state) => ({
-            products: state.products.filter((p) => String(p.id) !== String(id)),
-          }));
+          if (productService && typeof productService.remove === "function") {
+            await productService.remove(id);
+          }
         } catch (error) {
           console.error(error);
         }
