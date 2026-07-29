@@ -1,11 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
+import { FiPlus, FiSearch } from "react-icons/fi";
 
 import useProductStore from "../../../store/useProductStore";
-
-import {
-  FiPlus,
-  FiSearch,
-} from "react-icons/fi";
 
 import Button from "../../../components/ui/Button/Button";
 import Select from "../../../components/ui/Select/Select";
@@ -29,56 +25,25 @@ function Produtos() {
   // STORE
   // ==========================
 
-  const search = useProductStore(
-    (state) => state.search
-  );
+  const search = useProductStore((state) => state.search);
+  const setSearch = useProductStore((state) => state.setSearch);
 
-  const setSearch = useProductStore(
-    (state) => state.setSearch
-  );
+  const category = useProductStore((state) => state.category);
+  const setCategory = useProductStore((state) => state.setCategory);
 
-  const category = useProductStore(
-    (state) => state.category
-  );
+  const itemsPerPage = useProductStore((state) => state.itemsPerPage);
+  const setItemsPerPage = useProductStore((state) => state.setItemsPerPage);
 
-  const setCategory = useProductStore(
-    (state) => state.setCategory
-  );
+  const products = useProductStore((state) => state.products || []);
 
-  const itemsPerPage = useProductStore(
-    (state) => state.itemsPerPage
-  );
+  const addProduct = useProductStore((state) => state.addProduct);
+  const updateProduct = useProductStore((state) => state.updateProduct);
+  const deleteProduct = useProductStore((state) => state.deleteProduct);
 
-  const setItemsPerPage = useProductStore(
-    (state) => state.setItemsPerPage
-  );
-
-  const products = useProductStore(
-    (state) => state.products
-  );
-
-  const loadProducts = useProductStore(
-    (state) => state.loadProducts
-  );
-
-  const addProduct = useProductStore(
-    (state) => state.addProduct
-  );
-
-  const updateProduct = useProductStore(
-    (state) => state.updateProduct
-  );
-
-  const deleteProduct = useProductStore(
-    (state) => state.deleteProduct
-  );
-
-  useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
+  // ⚠️ REMOVIDO: O useEffect com loadProducts() foi apagado para impedir o reset dos dados.
 
   async function handleSave(product) {
-    if (selectedProduct) {
+    if (selectedProduct?.id) {
       await updateProduct({
         ...product,
         id: selectedProduct.id,
@@ -106,28 +71,14 @@ function Produtos() {
   }
 
   const categoryOptions = [
-    {
-      value: "",
-      label: "Todas categorias",
-    },
-    {
-      value: "Perfumes",
-      label: "Perfumes",
-    },
-    {
-      value: "Cabelos",
-      label: "Cabelos",
-    },
-    {
-      value: "Banho",
-      label: "Banho",
-    },
-    {
-      value: "Hidratantes",
-      label: "Hidratantes",
-    },
+    { value: "", label: "Todas categorias" },
+    { value: "Perfumes", label: "Perfumes" },
+    { value: "Cabelos", label: "Cabelos" },
+    { value: "Banho", label: "Banho" },
+    { value: "Hidratantes", label: "Hidratantes" },
   ];
 
+  // Filtra a lista de produtos reativamente
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const text = search.trim().toLowerCase();
@@ -139,20 +90,18 @@ function Produtos() {
         product.marca?.toLowerCase().includes(text);
 
       const matchesCategory =
-        category === "" ||
-        product.categoria === category;
+        category === "" || product.categoria === category;
 
       return matchesSearch && matchesCategory;
     });
-  }, [
-    products,
-    search,
-    category
-  ]);
+  }, [products, search, category]);
 
-  const totalPages = Math.ceil(
-    filteredProducts.length / itemsPerPage
-  );
+  // Reseta para a primeira página se o resultado filtrado for menor que o offset atual
+  useEffect(() => {
+    setPage(1);
+  }, [search, category]);
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
 
   const paginatedProducts = useMemo(() => {
     const start = (page - 1) * itemsPerPage;
@@ -164,9 +113,7 @@ function Produtos() {
       <div className="produtos__header">
         <div>
           <h1>Produtos</h1>
-          <p>
-            Gerencie todos os produtos do estoque.
-          </p>
+          <p>Gerencie todos os produtos do estoque.</p>
         </div>
 
         <Button
@@ -187,9 +134,7 @@ function Produtos() {
             type="text"
             placeholder="Pesquisar produto..."
             value={search}
-            onChange={(e) =>
-              setSearch(e.target.value)
-            }
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
@@ -210,36 +155,26 @@ function Produtos() {
             setSelectedProduct(product);
             setOpenForm(true);
           }}
-          onView={(product)=>{
-          setViewProduct(product);
+          onView={(product) => {
+            setViewProduct(product);
           }}
           onDelete={handleDelete}
         />
 
         <div className="produtos__footer">
           <div className="produtos__results">
-            Exibindo{" "}
-            <strong>
-              {paginatedProducts.length}
-            </strong>{" "}
-            de {filteredProducts.length} produto(s)
+            Exibindo <strong>{paginatedProducts.length}</strong> de{" "}
+            {filteredProducts.length} produto(s)
           </div>
 
           <div className="produtos__perPage">
-            <span>
-              Itens por página
-            </span>
+            <span>Itens por página</span>
 
             <div className="customSelect">
-
-              <div className="customSelect__value">
-                {itemsPerPage}
-              </div>
+              <div className="customSelect__value">{itemsPerPage}</div>
 
               <div className="customSelect__options">
-
                 {[10, 25, 50, 100].map((value) => (
-
                   <div
                     key={value}
                     className={
@@ -248,21 +183,14 @@ function Produtos() {
                         : "customSelect__option"
                     }
                     onClick={() => {
-
                       setItemsPerPage(value);
                       setPage(1);
-
                     }}
                   >
-
                     {value}
-
                   </div>
-
                 ))}
-
               </div>
-
             </div>
           </div>
         </div>
@@ -305,7 +233,7 @@ function Produtos() {
       <ProductDetailsModal
         open={!!viewProduct}
         product={viewProduct}
-        onClose={()=>{
+        onClose={() => {
           setViewProduct(null);
         }}
       />

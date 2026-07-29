@@ -1,5 +1,7 @@
 import "./SummaryCard.css";
 
+import { useNavigate } from "react-router-dom";
+
 import {
   FiArrowUpRight,
   FiArrowDownRight,
@@ -8,6 +10,8 @@ import {
 import { summaryCards } from "../../mocks/dashboardData";
 
 function SummaryCard() {
+  const navigate = useNavigate();
+
   return (
     <>
       {summaryCards.map((card) => {
@@ -17,6 +21,7 @@ function SummaryCard() {
           <article
             key={card.id}
             className="summaryCard"
+            onClick={() => navigate(card.route)}
           >
             <div className="summaryCard__top">
 
@@ -44,6 +49,7 @@ function SummaryCard() {
                 )}
 
                 {card.variation}
+
               </div>
 
             </div>

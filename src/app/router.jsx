@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "../components/layout/Layout/Layout";
-
+import Estoque from "../features/estoque/pages/Estoque";
 import Dashboard from "../features/dashboard/pages/Dashboard";
 import Produtos from "../features/produtos/pages/Produtos";
 import Vendas from "../features/vendas/pages/Vendas";
@@ -20,6 +20,7 @@ function Router() {
         <Route path="vendas" element={<Vendas />} />
         <Route path="clientes" element={<Clientes />} />
         <Route path="compras" element={<Compras />} />
+        <Route path="estoque" element={<Estoque />} />
         <Route path="relatorios" element={<Relatorios />} />
         <Route path="configuracoes" element={<Configuracoes />} />
       </Route>

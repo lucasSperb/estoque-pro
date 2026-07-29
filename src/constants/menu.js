@@ -14,6 +14,7 @@ const menu = [
   { title: "Vendas", path: "/vendas", icon: FiShoppingCart },
   { title: "Clientes", path: "/clientes", icon: FiUsers },
   { title: "Compras", path: "/compras", icon: FiTruck },
+  { title: "Estoque", path: "/estoque", icon: FiBox },
   { title: "Relatórios", path: "/relatorios", icon: FiBarChart2 },
   { title: "Configurações", path: "/configuracoes", icon: FiSettings },
 ];

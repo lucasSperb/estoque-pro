@@ -1,3 +1,10 @@
+import {
+  FiBox,
+  FiArchive,
+  FiDollarSign,
+  FiUsers,
+} from "react-icons/fi";
+
 export const lowStockProducts = [
   {
     id: 1,
@@ -70,13 +77,6 @@ export const salesChartData = [
   { mes: "Jul", vendas: 7100 },
 ];
 
-import {
-  FiBox,
-  FiArchive,
-  FiDollarSign,
-  FiUsers,
-} from "react-icons/fi";
-
 export const summaryCards = [
   {
     id: 1,
@@ -86,6 +86,7 @@ export const summaryCards = [
     color: "#3B82F6",
     variation: "+12%",
     positive: true,
+    route: "/produtos",
   },
   {
     id: 2,
@@ -95,6 +96,7 @@ export const summaryCards = [
     color: "#10B981",
     variation: "+4%",
     positive: true,
+    route: "/estoque",
   },
   {
     id: 3,
@@ -104,6 +106,7 @@ export const summaryCards = [
     color: "#F59E0B",
     variation: "+18%",
     positive: true,
+    route: "/vendas",
   },
   {
     id: 4,
@@ -113,5 +116,6 @@ export const summaryCards = [
     color: "#8B5CF6",
     variation: "-2%",
     positive: false,
+    route: "/clientes",
   },
 ];

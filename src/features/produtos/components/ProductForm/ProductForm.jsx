@@ -31,7 +31,10 @@ function ProductForm({
     if (!open) return;
 
     if (product) {
-      setForm(product);
+      setForm({
+        ...initialState,
+        ...product,
+      });
     } else {
       setForm(initialState);
     }
@@ -87,13 +90,17 @@ function ProductForm({
       return;
     }
 
-    onSave({
+    // Garante a conversão dos campos numéricos para número
+    const formattedData = {
       ...form,
-      custo: Number(form.custo),
-      preco: Number(form.preco),
-      estoque: Number(form.estoque),
-      estoqueMinimo: Number(form.estoqueMinimo),
-    });
+      custo: Number(form.custo || 0),
+      preco: Number(form.preco || 0),
+      estoque: Number(form.estoque || 0),
+      estoqueMinimo: Number(form.estoqueMinimo || 0),
+    };
+
+    onSave(formattedData);
+    onClose();
   }
 
   if (!open) return null;
