@@ -1,0 +1,154 @@
+.configuracoes {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.configuracoes__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.configuracoes__header h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.configuracoes__header p {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.configuracoes__headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.configuracoes__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.configCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: var(--shadow);
+}
+
+.configCard__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.configCard__header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.configCard__icon {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.configCard__body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.configForm__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.configForm__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.configForm__group--nested {
+  padding-left: 28px;
+}
+
+.configForm__group label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.configInput {
+  height: 42px;
+  padding: 0 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.configInput:focus {
+  border-color: var(--primary);
+}
+
+.configInput--sm {
+  width: 120px;
+}
+
+.configForm__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text);
+  user-select: none;
+}
+
+.configForm__toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .configuracoes__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .configuracoes__headerActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .configForm__grid {
+    grid-template-columns: 1fr;
+  }
+}
