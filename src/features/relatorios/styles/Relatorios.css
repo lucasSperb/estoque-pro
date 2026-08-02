@@ -1,0 +1,152 @@
+.relatorios {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.relatorios__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.relatorios__header h1 {
+  font-size: 2rem;
+  color: var(--text);
+}
+
+.relatorios__header p {
+  margin-top: 4px;
+  color: var(--text-secondary);
+}
+
+.relatorios__headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.relatorios__filter {
+  min-width: 180px;
+}
+
+.relatorios__summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.relatoriosCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.relatoriosCard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.relatoriosCard__icon {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.relatoriosCard__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.relatorios__content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.relatoriosSection h2 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.relatoriosTable {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.relatoriosTable__row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.relatoriosTable__row--header {
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: 8px;
+}
+
+.relatorios__chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.relatoriosChartCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.relatoriosChartCard h3 {
+  font-size: 1rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.relatoriosChartCard__wrapper {
+  width: 100%;
+  height: 260px;
+}
+
+@media (max-width: 900px) {
+  .relatorios__chartsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .relatorios__summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .relatorios__summary {
+    grid-template-columns: 1fr;
+  }
+
+  .relatorios__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
