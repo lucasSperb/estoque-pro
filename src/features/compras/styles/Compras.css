@@ -1,0 +1,458 @@
+.compras {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.compras__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.compras__header h1 {
+  font-size: 2rem;
+  color: var(--text);
+}
+
+.compras__header p {
+  margin-top: 4px;
+  color: var(--text-secondary);
+}
+
+.compras__summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.comprasCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comprasCard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comprasCard__title {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.comprasCard__icon {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.comprasCard__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.compras__toolbar {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.compras__search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 16px;
+}
+
+.compras__search svg {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.compras__search input {
+  flex: 1;
+  height: 46px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.compras__filter {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 200px;
+}
+
+.comprasSelect {
+  height: 46px;
+  padding: 0 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.comprasSelect:hover,
+.comprasSelect:focus,
+.comprasInput:focus {
+  border-color: var(--primary);
+}
+
+.compras__content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.comprasTable {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.comprasTable__row {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1.5fr 1fr 1fr;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.comprasTable__row:last-child {
+  border-bottom: none;
+}
+
+.comprasTable__row--header {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.comprasTable__cell {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.comprasTable__subtext {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.compras__empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.compras__empty h2 {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.compras__empty p {
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   ESTILOS DO MODAL & FORMULÁRIO (CORRIGIDOS)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-container,
+.modal-content {
+  background: var(--surface, #1e1e2d);
+  border: 1px solid var(--border, #2b2b40);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  /* IMPORTANTE: Permite que o menu do Select fique visível fora dos limites do modal */
+  overflow: visible !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  color: var(--text, #ffffff);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border, #2b2b40);
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text, #ffffff);
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary, #94a3b8);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text, #ffffff);
+}
+
+.modal-body {
+  padding: 24px;
+  /* IMPORTANTE: Evita que o Select seja cortado internamente */
+  overflow: visible !important; 
+}
+
+.comprasForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comprasForm__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.comprasForm__group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.comprasInput {
+  height: 42px;
+  padding: 0 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border, #2b2b40);
+  border-radius: 8px;
+  color: var(--text, #ffffff);
+  font-size: 0.875rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.comprasInput:focus {
+  border-color: var(--primary, #6366f1);
+}
+
+/* Tamanhos fixos e proporcionais para os inputs do formulário */
+.comprasInput--sm {
+  width: 70px !important;
+  flex-shrink: 0;
+}
+
+.comprasInput--md {
+  width: 110px !important;
+  flex-shrink: 0;
+}
+
+.comprasCart {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border, #2b2b40);
+}
+
+.comprasCart h3 {
+  font-size: 0.95rem;
+  color: var(--text, #ffffff);
+  margin: 0;
+}
+
+.comprasCart__inputs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* O Select customizado ocupa o espaço restante da linha do formulário */
+.comprasCart__inputs .select {
+  flex: 1;
+  min-width: 180px;
+}
+
+.comprasCart__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 160px;
+  overflow-y: auto;
+  margin-top: 8px;
+  padding-right: 4px;
+}
+
+.comprasCart__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #2b2b40);
+  font-size: 0.875rem;
+  color: var(--text, #ffffff);
+}
+
+.comprasCart__item span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary, #94a3b8);
+}
+
+.comprasCart__itemRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.comprasRemoveBtn {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.comprasRemoveBtn:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.comprasCart__total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 700;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border, #2b2b40);
+  color: var(--text, #ffffff);
+}
+
+.comprasForm__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border, #2b2b40);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .compras__summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .compras__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .compras__toolbar {
+    flex-direction: column;
+  }
+
+  .compras__content {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 700px) {
+  .compras__summary {
+    grid-template-columns: 1fr;
+  }
+
+  .comprasTable__row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .comprasTable__row--header {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .compras {
+    gap: 18px;
+  }
+
+  .compras__header h1 {
+    font-size: 1.6rem;
+  }
+
+  .comprasCart__inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .comprasInput--sm,
+  .comprasInput--md {
+    width: 100% !important;
+  }
+}
