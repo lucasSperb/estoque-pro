@@ -9,19 +9,17 @@ import StockSummary from "../components/StockSummary/StockSummary";
 import StockTable from "../components/StockTable/StockTable";
 import StockHistory from "../components/StockHistory/StockHistory";
 import StockMovementModal from "../components/StockMovementModal/StockMovementModal";
-import ProductDetailsModal from "../../Produtos/components/ProductDetailsModal/ProductDetailsModal";
+import ProductDetailsModal from "../../produtos/components/ProductDetailsModal/ProductDetailsModal";
 
 import "../styles/Estoque.css";
 
 function Estoque() {
-  const [activeTab, setActiveTab] = useState("table"); // 'table' | 'history'
+  const [activeTab, setActiveTab] = useState("table");
   const [movementOpen, setMovementOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [movementType, setMovementType] = useState("entrada");
   
-  // Flag para evitar requisições/chamadas duplas consecutivas
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [viewProduct, setViewProduct] = useState(null);
 
   const products = useProductStore((state) => state.products) || [];
@@ -35,7 +33,6 @@ function Estoque() {
   }
 
   async function handleSaveMovement(movementData) {
-    // Se já estiver salvando, bloqueia a segunda chamada!
     if (isSubmitting) return;
     setIsSubmitting(true);
 
